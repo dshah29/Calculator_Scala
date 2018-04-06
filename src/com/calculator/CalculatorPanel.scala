@@ -35,7 +35,7 @@ class CalculatorPanel extends JPanel
     gridy = row
     gridwidth = width
     gridheight = height
-    insets = new Insets(2, 2, 2, 2)
+    insets = new Insets(2, 2, 2, 4)
     fill = GridBagConstraints.BOTH
   }
 }

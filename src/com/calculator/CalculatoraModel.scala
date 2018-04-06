@@ -34,7 +34,8 @@ class CalculatorModel
 
   private def appendDigit(digit: String): Unit = 
   {
-    val v = if (isNewValue && digit != ".") "" else currValue
+    val v = if (isNewValue && digit != ".") "" 
+            else currValue
     if (isDuplicatedDot(v, digit) || isLengthMaximal(v)) throw new IllegalArgumentException
     currValue = dropLeftZeros(v + digit)
     isNewValue = false
@@ -64,7 +65,8 @@ class CalculatorModel
   {
     val x = BigDecimal(prevValue)
     val y = BigDecimal(currValue)
-    operation match {
+    operation match 
+    {
       case "+" => x + y
       case "-" => x - y
       case "*" => x * y
