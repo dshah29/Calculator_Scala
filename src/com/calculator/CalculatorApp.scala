@@ -14,7 +14,7 @@ object CalculatorApp
   def main(args: Array[String]): Unit = new CalculatorApp
 }
 
-class CalculatorApp private 
+class CalculatorApp private
 {
   private val font = new Font("Verdana", Font.BOLD, 14)
   private val calculator = new CalculatorModel
@@ -26,6 +26,7 @@ class CalculatorApp private
     setFont(font)
     setEditable(false)
   }
+  
 
   new JFrame 
   {
@@ -40,7 +41,7 @@ class CalculatorApp private
       atNewLine(button("7")).beside(button("8")).beside(button("9")).beside(button("+")).beside(button("cos")).beside(button("cosh")).beside(button("x^3"))
       atNewLine(button("4")).beside(button("5")).beside(button("6")).beside(button("-")).beside(button("tan")).beside(button("tanh")).beside(button("x^y"))
       atNewLine(button("1")).beside(button("2")).beside(button("3")).beside(button("=")).beside(button("Pi")).beside(button("Mod")).beside(button("log"))
-      atNewLineWithColumnSpan(button("0"), 3).beside(button(".")).beside(button("(")).beside(button(")")).beside(button("1/x"))
+      atNewLineWithColumnSpan(button("0"), 3).beside(button(".")).beside(button("10^x")).beside(button("sqrt(x)")).beside(button("1/x"))
     })
     setResizable(false)
     pack()
@@ -72,6 +73,7 @@ class CalculatorApp private
     {
         calculator.pressButton(name)
         display.setText(calculator.getCurrValue)
+        
       }
     catch 
     {

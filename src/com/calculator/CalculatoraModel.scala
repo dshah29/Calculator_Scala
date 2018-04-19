@@ -3,6 +3,9 @@ package com.calculator
 import scala.math.BigDecimal
 import java.math.MathContext
 import annotation.tailrec
+import scala.math.sqrt
+
+
 
 class CalculatorModel 
 {
@@ -13,13 +16,11 @@ class CalculatorModel
   private var currValue: String = _
   private var operation: String = _
   private var isNewValue: Boolean = _
-
+  
   reset()
 
   def getCurrValue: String = currValue
-  def getPrevValue: String = prevValue
-  def getOperation: String = currValue
-
+  
   def pressButton(name: String): Unit = name match
   {
       case "C" => reset()
@@ -27,7 +28,7 @@ class CalculatorModel
       case "+" | "-" | "*" | "/" => setOperation(name)
       case "Mod" | "x^y" => setOperation(name)
       case "tan" | "sin" | "cos" | "tanh" | "sinh" | "cosh" => { setOperation(name) ; completeOperation() }
-      case "x^2" | "x^3" |  "log" | "1/x" => { setOperation(name) ; completeOperation() }
+      case "x^2" | "x^3" |  "log" | "1/x" | "10^x" | "sqrt(x)" => { setOperation(name) ; completeOperation() }
       case "Pi" => {currValue = Math.PI.toString(); setOperation("=")}
       case _ => appendDigit(name)
     }
@@ -71,6 +72,7 @@ class CalculatorModel
   {
     val x = BigDecimal(prevValue)
     val y = BigDecimal(currValue)
+    val z = BigDecimal(10)
     operation match 
     {
       case "+" => x + y
@@ -88,6 +90,8 @@ class CalculatorModel
       case "x^2" => x.pow(2)
       case "x^3" => x.pow(3)
       case "1/x" => 1/x
+      case "10^x" => z.pow(x.intValue())
+      case "sqrt(x)" => sqrt(x.toDouble)
       case "log" => BigDecimal.double2bigDecimal(Math.log(y.toDouble))
       case _ => y
     }
