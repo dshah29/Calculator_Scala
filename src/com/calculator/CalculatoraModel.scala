@@ -17,12 +17,18 @@ class CalculatorModel
   reset()
 
   def getCurrValue: String = currValue
+  def getPrevValue: String = prevValue
+  def getOperation: String = currValue
 
   def pressButton(name: String): Unit = name match
   {
       case "C" => reset()
       case "=" => completeOperation()
       case "+" | "-" | "*" | "/" => setOperation(name)
+      case "Mod" | "x^y" => setOperation(name)
+      case "tan" | "sin" | "cos" | "tanh" | "sinh" | "cosh" => { setOperation(name) ; completeOperation() }
+      case "x^2" | "x^3" |  "log" | "1/x" => { setOperation(name) ; completeOperation() }
+      case "Pi" => {currValue = Math.PI.toString(); setOperation("=")}
       case _ => appendDigit(name)
     }
 
@@ -71,6 +77,18 @@ class CalculatorModel
       case "-" => x - y
       case "*" => x * y
       case "/" => x / y
+      case "tan" => BigDecimal.double2bigDecimal(Math.tan(y.toDouble))
+      case "sin" => BigDecimal.double2bigDecimal(Math.sin(y.toDouble))
+      case "cos" => BigDecimal.double2bigDecimal(Math.cos(y.toDouble))
+      case "tanh" => BigDecimal.double2bigDecimal(Math.tanh(y.toDouble))
+      case "sinh" => BigDecimal.double2bigDecimal(Math.sinh(y.toDouble))
+      case "cosh" => BigDecimal.double2bigDecimal(Math.cosh(y.toDouble))
+      case "Mod" => x % y
+      case "x^y" => x.pow(y.intValue())
+      case "x^2" => x.pow(2)
+      case "x^3" => x.pow(3)
+      case "1/x" => 1/x
+      case "log" => BigDecimal.double2bigDecimal(Math.log(y.toDouble))
       case _ => y
     }
   }
